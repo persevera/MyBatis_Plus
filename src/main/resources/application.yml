@@ -1,0 +1,39 @@
+spring:
+ datasource:
+  #配置多数据源
+  dynamic:
+   primary: mysql1 #设置默认的数据源或者数据源组,默认值即为mysql1
+   strict: false #严格匹配数据源,默认false. true未匹配到指定数据源时抛异常,false使用默认数据源
+   datasource:
+    mysql1:
+     url: jdbc:mysql://43.138.55.22:3306/liu
+     username: root
+     password: 123456
+     driver-class-name: com.mysql.cj.jdbc.Driver # 3.2.0开始支持SPI可省略此配置
+    mysql2:
+     url: jdbc:mysql://43.138.55.22:3307/liu2
+     username: root
+     password: 123456
+     driver-class-name: com.mysql.cj.jdbc.Driver
+    mysql3:
+     url: ENC(xxxxx) # 内置加密,使用请查看详细文档
+     username: ENC(xxxxx)
+     password: ENC(xxxxx)
+     driver-class-name: com.mysql.cj.jdbc.Driver
+    #......省略
+
+
+
+
+#配置日志
+mybatis-plus:
+ configuration:
+  log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+ mapper-locations: classpath*:/mapper/**/*.xml          #配置mapper.xml文件的位置，默认是resource/mapper
+ #给实体类所有对应的表加上t_前缀
+ global-config:
+   db-config:
+    table-prefix: t_
+    id-type: auto                        #设置全局自增策略
+ type-aliases-package: com.liuyong.mybatisplus.myclass  #指定实体类所在的位置
+ type-enums-package: com.liuyong.mybatisplus.myclass  #指定枚举所在的包
